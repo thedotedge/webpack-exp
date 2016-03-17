@@ -1,16 +1,16 @@
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 module.exports = {
-    entry: "./entry.js",
+    entry: './entry.js',
     output: {
         path: __dirname,
-        filename: "bundle.js"
+        filename: 'bundle.js'
     },
-    devtool: "#source-map",
+    devtool: '#source-map',
     module: {
         loaders: [
             {
-                test: /\.css$/, loader: "style!css"
+                test: /\.css$/, loader: 'style!css'
             },
             {
                 test: /\.js?$/,
@@ -25,8 +25,21 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
-            mangle: true
+            mangle: true,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
-    ]
-};
+    ],
+    externals: {
+        // require("jquery") is external and available
+        //  on the global var jQuery
+        'jquery': 'jQuery'
+    }
+}
+
 

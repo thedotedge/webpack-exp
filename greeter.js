@@ -1,9 +1,10 @@
-var person = require('./person');
+var person = require('./person'),
+    moment = require('./node_modules/moment');
 
-var time = 'today';
+moment.locale('th');
 var greeter = {
-  version: 12,
-  text: `Hello ${person.name}, how are you ${time}?`
+    version: 12,
+    text: `Hello ${person.name}, how are you? FYI, local time in Oslo now is ${moment().format('LLL')}.`
 };
 
 module.exports = greeter;
